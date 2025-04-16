@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  DashboardOutlined,
   HomeOutlined,
   InfoCircleOutlined,
   MenuFoldOutlined,
@@ -15,6 +16,9 @@ import Contact from "../pages/contact";
 import About from "../pages/about";
 import Data from "../pages/data";
 import Users from "../pages/users";
+import AddUser from "../pages/add_user";
+import Dashboard from "../pages/dashboard";
+
 
 const { Header, Sider, Content } = Layout;
 
@@ -37,8 +41,13 @@ const Sidebar = () => {
           items={[
             {
               key: "/",
+              icon: <DashboardOutlined />,
+              label: <Link to="/">Dashboard</Link>,
+            },
+            {
+              key: "/home",
               icon: <HomeOutlined />,
-              label: <Link to="/">Home</Link>,
+              label: <Link to="/home">Home</Link>,
             },
             {
               key: "/data",
@@ -66,20 +75,27 @@ const Sidebar = () => {
 
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{ fontSize: "16px", width: 64, height: 64 }}
-          />
-          <Link to="/users">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             <Button
-              type="primary"
-              icon={<PlusOutlined />}
-              style={{ marginLeft: "right" }}
-            >
-            </Button>
-          </Link>
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{ fontSize: "16px", width: 64, height: 64 }}
+            />
+            <Link to="/add_user">
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                style={{ marginRight: 10 }}
+              ></Button>
+            </Link>
+          </div>
         </Header>
 
         <Content
@@ -92,11 +108,13 @@ const Sidebar = () => {
           }}
         >
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/data" element={<Data />} />
             <Route path="/users" element={<Users />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/add_user" element={<AddUser />} />
           </Routes>
         </Content>
       </Layout>
