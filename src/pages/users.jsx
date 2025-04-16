@@ -4,29 +4,29 @@ import "antd/dist/reset.css";
 import { useGlobalState } from '../provider/GlobalStateContext';
 
 
-function Data(){
+function Users(){
 
 const {data,setData} = useGlobalState([])  
-const { name, setName } = useGlobalState(); 
+// const { name, setName } = useGlobalState(); 
 
 
 
 useEffect(() => {
-    fetch("https://datausa.io/api/data?drilldowns=Nation&measures=Population")
+    fetch('https://fakestoreapi.com/users/')
     .then((res) => res.json())
-    .then((responsedata) =>setData(responsedata.data));
+    .then((responsedata) =>setData(responsedata));
     },[setData])
     const columns = [
-        { title: 'Nation', dataIndex: 'Nation' ,key:'Nation' },
-        { title: 'Population',dataIndex: 'Population' ,key:'Population' },
-        { title:"Year" , dataIndex:"Year", key: "Year"}
+        { title: 'Username', dataIndex: 'username' ,key:'username' },
+        { title: 'Password',dataIndex: 'password' ,key:'password' },
+        { title:"Email" , dataIndex:"email", key: "email"}
     ]
     return(
         <div>
-        <h1>{name}</h1> 
-        <h1>US Data</h1>
+        {/* <h1>{name}</h1> globalstate   */}
+        <h1>User's Credential</h1>
         <Table dataSource={data.map((item,index)=> ({...item, key:index}))} columns={columns}  pagination={{ pageSize: 5 }}/>;
         </div>
     );
 }
-export default Data;
+export default Users;

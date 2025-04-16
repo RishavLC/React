@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+// import { Route,Routes } from 'react-router-dom';
 import Sidebar from './component/sidebar';
-import Home from './pages/home';
-import About from './pages/about';
-import Contact from './pages/contact';
+// import Home from './pages/home';
+// import About from './pages/about';
+// import Contact from './pages/contact';
 import './App.css'; 
 import { GlobalStateProvider } from './provider/GlobalStateContext';
 
@@ -14,11 +15,11 @@ const App = () => {
       <div className="app-container">
         <Sidebar />
         <div className="main-content">
-          <Routes>
+          {/* <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} /> 
-          </Routes>
+          </Routes> */}
         </div>
       </div>
     </Router>

@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   HomeOutlined,
   InfoCircleOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PhoneOutlined,
-} from '@ant-design/icons';
+  PlusOutlined,
+} from "@ant-design/icons";
 
-import { Button, Layout, Menu, theme } from 'antd';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import Home from '../pages/home';
-import Contact from '../pages/contact';
-import About from '../pages/about';
-import Data from '../pages/data';
-
+import { Button, Layout, Menu, theme } from "antd";
+import { Route, Routes, Link, useLocation } from "react-router-dom";
+import Home from "../pages/home";
+import Contact from "../pages/contact";
+import About from "../pages/about";
+import Data from "../pages/data";
+import Users from "../pages/users";
 
 const { Header, Sider, Content } = Layout;
 
@@ -26,31 +27,36 @@ const Sidebar = () => {
   const location = useLocation();
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ minHeight: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
-          theme= "dark"
+          theme="dark"
           mode="inline"
           selectedKeys={[location.pathname]}
           items={[
             {
-              key: '/',
+              key: "/",
               icon: <HomeOutlined />,
               label: <Link to="/">Home</Link>,
             },
             {
-              key: '/data',
+              key: "/data",
               icon: <InfoCircleOutlined />,
               label: <Link to="/data">USA Data</Link>,
             },
             {
-              key: '/contact',
+              key: "/users",
+              icon: <InfoCircleOutlined />,
+              label: <Link to="/users">User's Credential</Link>,
+            },
+            {
+              key: "/contact",
               icon: <PhoneOutlined />,
               label: <Link to="/contact">Contact</Link>,
             },
             {
-              key: '/about',
+              key: "/about",
               icon: <InfoCircleOutlined />,
               label: <Link to="/about">About Us</Link>,
             },
@@ -64,13 +70,21 @@ const Sidebar = () => {
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
-            style={{ fontSize: '16px', width: 64, height: 64 }}
+            style={{ fontSize: "16px", width: 64, height: 64 }}
           />
+          <Link to="/users">
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              style={{ marginLeft: "right" }}
+            >
+            </Button>
+          </Link>
         </Header>
 
         <Content
           style={{
-            margin: '24px 16px',
+            margin: "24px 16px",
             padding: 24,
             minHeight: 280,
             background: colorBgContainer,
@@ -80,6 +94,7 @@ const Sidebar = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/data" element={<Data />} />
+            <Route path="/users" element={<Users />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
           </Routes>
@@ -91,7 +106,7 @@ const Sidebar = () => {
 
 export default Sidebar;
 
-
+// light dark theme
 // import React, { useState } from 'react';
 // import {
 //   MenuFoldOutlined,
