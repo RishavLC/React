@@ -30,3 +30,10 @@
   border-radius: 8px;
   margin: 10px 0;
 }
+.logo {
+  height: 32px;
+  margin: 16px;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+}

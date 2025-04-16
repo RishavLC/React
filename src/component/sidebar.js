@@ -1,0 +1,210 @@
+import React, { useState } from 'react';
+import {
+  HomeOutlined,
+  InfoCircleOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PhoneOutlined,
+} from '@ant-design/icons';
+
+import { Button, Layout, Menu, theme } from 'antd';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import Home from '../pages/home';
+import Contact from '../pages/contact';
+import About from '../pages/about';
+import Data from '../pages/data';
+
+
+const { Header, Sider, Content } = Layout;
+
+const Sidebar = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+
+  const location = useLocation();
+
+  return (
+    <Layout style={{ minHeight: '100vh' }}>
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="demo-logo-vertical" />
+        <Menu
+          theme= "dark"
+          mode="inline"
+          selectedKeys={[location.pathname]}
+          items={[
+            {
+              key: '/',
+              icon: <HomeOutlined />,
+              label: <Link to="/">Home</Link>,
+            },
+            {
+              key: '/data',
+              icon: <InfoCircleOutlined />,
+              label: <Link to="/data">USA Data</Link>,
+            },
+            {
+              key: '/contact',
+              icon: <PhoneOutlined />,
+              label: <Link to="/contact">Contact</Link>,
+            },
+            {
+              key: '/about',
+              icon: <InfoCircleOutlined />,
+              label: <Link to="/about">About Us</Link>,
+            },
+          ]}
+        />
+      </Sider>
+
+      <Layout>
+        <Header style={{ padding: 0, background: colorBgContainer }}>
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{ fontSize: '16px', width: 64, height: 64 }}
+          />
+        </Header>
+
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            minHeight: 280,
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/data" element={<Data />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </Content>
+      </Layout>
+    </Layout>
+  );
+};
+
+export default Sidebar;
+
+
+// import React, { useState } from 'react';
+// import {
+//   MenuFoldOutlined,
+//   MenuUnfoldOutlined,
+//   UploadOutlined,
+//   UserOutlined,
+//   VideoCameraOutlined,
+// } from '@ant-design/icons';
+// import { Button, Layout, Menu, Switch } from 'antd';
+// import { Routes, Route, Link, useLocation } from 'react-router-dom';
+// import Home from '../pages/home';
+// import Contact from '../pages/contact';
+// import About from '../pages/about';
+
+// const { Header, Sider, Content } = Layout;
+
+// const Sidebar = () => {
+//   const [collapsed, setCollapsed] = useState(false);
+//   const [darkTheme, setDarkTheme] = useState(true);
+//   const location = useLocation();
+
+//   const toggleTheme = (checked) => {
+//     console.log(`Switched to ${checked ? 'Dark' : 'Light'} Theme`);
+//     setDarkTheme(checked);
+//   };
+
+//   return (
+//     <Layout style={{ minHeight: '100vh' }}>
+//       <Sider
+//         trigger={null}
+//         collapsible
+//         collapsed={collapsed}
+//         theme={darkTheme ? 'dark' : 'light'}
+//       >
+//         <div
+//           style={{
+//             height: 32,
+//             margin: 16,
+//             background: darkTheme ? '#001529' : '#f0f0f0',
+//             borderRadius: 6,
+//           }}
+//         />
+//         <Menu
+//           theme={darkTheme ? 'dark' : 'light'}
+//           mode="inline"
+//           selectedKeys={[location.pathname]}
+//           items={[
+//             {
+//               key: '/',
+//               icon: <UserOutlined />,
+//               label: <Link to="/">Home</Link>,
+//             },
+//             {
+//               key: '/contact',
+//               icon: <VideoCameraOutlined />,
+//               label: <Link to="/contact">Contact</Link>,
+//             },
+//             {
+//               key: '/about',
+//               icon: <UploadOutlined />,
+//               label: <Link to="/about">About Us</Link>,
+//             },
+//           ]}
+//         />
+//       </Sider>
+//       <Layout>
+//         <Header
+//           style={{
+//             padding: 0,
+//             background: darkTheme ? '#001529' : '#fff',
+//             display: 'flex',
+//             alignItems: 'center',
+//             justifyContent: 'space-between',
+//             paddingRight: 20,
+//           }}
+//         >
+//           <Button
+//             type="text"
+//             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+//             onClick={() => setCollapsed(!collapsed)}
+//             style={{
+//               fontSize: '16px',
+//               width: 64,
+//               height: 64,
+//               color: darkTheme ? '#fff' : '#000',
+//             }}
+//           />
+//           <Switch
+//             checkedChildren="Dark"
+//             unCheckedChildren="Light"
+//             defaultChecked
+//             onChange={toggleTheme}
+//           />
+//         </Header>
+//         <Content
+//           style={{
+//             margin: '24px 16px',
+//             padding: 24,
+//             minHeight: 280,
+//             background: darkTheme ? '#423256' : '#fff',
+//             color: darkTheme ? '#fff' : '#000',
+//             borderRadius: 8,
+//           }}
+//         >
+//           <Routes>
+//             <Route path="/" element={<Home />} />
+//             <Route path="/contact" element={<Contact />} />
+//             <Route path="/about" element={<About />} />
+//           </Routes>
+//         </Content>
+//       </Layout>
+//     </Layout>
+//   );
+// };
+
+// export default Sidebar;
