@@ -1,28 +1,45 @@
 import React from "react";
-import { Button, Checkbox, Form, Input, notification } from 'antd';
+import { Button, Checkbox, Form, Input, notification } from "antd";
+import { useGlobalState } from "../provider/GlobalStateContext";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
+  const { data, setData } = useGlobalState([]);
+  const navigate = useNavigate();
+
   const onFinish = (values) => {
-    console.log('Success:', values);
-    notification.info({
-      message: "User Successfully added!!!",
+    const newUser = {
+      id: Date.now(), // Unique local ID
+      username: values.username,
+      password: values.password,
+      email: values.email,
+    };
+
+    // Add to global state
+    setData([...data, newUser]);
+
+    // Success Notification
+    notification.success({
+      message: "User Added",
       description: `Welcome, ${values.username}`,
     });
+
+    // Redirect to /users
+    navigate("/users");
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
     notification.error({
-      message: "Failed",
-      description: "Please fill all required fields",
+      message: "Form Incomplete",
+      description: "Please fill all required fields correctly",
     });
   };
 
   return (
     <>
-    <h1>Register User</h1>
+      <h1>Register User</h1>
       <Form
-        name="basic"
+        name="add_user"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600 }}
@@ -34,15 +51,15 @@ const AddUser = () => {
         <Form.Item
           label="Username"
           name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: true, message: "Please input your username!" }]}
         >
           <Input />
         </Form.Item>
-  
+
         <Form.Item
           label="Password"
           name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password />
         </Form.Item>
@@ -50,16 +67,20 @@ const AddUser = () => {
         <Form.Item
           label="Email"
           name="email"
-          rules={[{ required: true, message: 'Please input your email!' }]}
+          rules={[{ required: true, message: "Please input your email!" }]}
         >
           <Input />
         </Form.Item>
-  
-        <Form.Item name="remember" valuePropName="checked" label={null}>
+
+        <Form.Item
+          name="remember"
+          valuePropName="checked"
+          wrapperCol={{ offset: 8, span: 16 }}
+        >
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-  
-        <Form.Item label={null}>
+
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
@@ -67,6 +88,6 @@ const AddUser = () => {
       </Form>
     </>
   );
-  };
+};
 
 export default AddUser;
