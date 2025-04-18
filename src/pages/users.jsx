@@ -117,7 +117,7 @@ useEffect(() => {
       />
 
       
-      <Modal //Update Modal 
+      <Modal //form using for updating data
         title="Update User"
         open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}

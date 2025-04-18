@@ -7,6 +7,7 @@ import {
   MenuUnfoldOutlined,
   PhoneOutlined,
   PlusOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 
 import { Button, Layout, Menu, theme } from "antd";
@@ -56,7 +57,7 @@ const Sidebar = () => {
             },
             {
               key: "/users",
-              icon: <InfoCircleOutlined />,
+              icon: <UserOutlined />,
               label: <Link to="/users">User's Credential</Link>,
             },
             {
