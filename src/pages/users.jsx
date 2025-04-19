@@ -62,19 +62,45 @@ useEffect(() => {
   };
 
   
-  const handleDelete = (id) => {// delectingg
-    fetch(`https://fakestoreapi.com/users/${id}`, {
-      method: 'DELETE'
-    })
-      .then((res) => res.json())
-      .then(() => {
-        setData((prev) => prev.filter((user) => user.id !== id));
-        notification.success({ message: 'User deleted successfully!' });
+  // const handleDelete = (id) => {// delectingg
+  //   fetch(`https://fakestoreapi.com/users/${id}`, {
+  //     method: 'DELETE'
+  //   })
+  //     .then((res) => res.json())
+  //     .then(() => {
+  //       setData((prev) => prev.filter((user) => user.id !== id));
+  //       notification.success({ message: 'User deleted successfully!' });
+  //     })
+  //     .catch(() =>
+  //       notification.error({ message: 'Failed to delete user!' })
+  //     );
+  // };
+
+
+const { confirm } = Modal;
+
+const handleDelete = (id) => {
+  confirm({
+    title: 'Are you sure you want to delete this user?',
+    content: 'This action cannot be undone.',
+    okText: 'Yes, Delete',
+    okType: 'danger',
+    cancelText: 'Cancel',
+    onOk() {
+      fetch(`https://fakestoreapi.com/users/${id}`, {
+        method: 'DELETE',
       })
-      .catch(() =>
-        notification.error({ message: 'Failed to delete user!' })
-      );
-  };
+        .then((res) => res.json())
+        .then(() => {
+          setData((prev) => prev.filter((user) => user.id !== id));
+          notification.success({ message: 'User deleted successfully!' });
+        })
+        .catch(() =>
+          notification.error({ message: 'Failed to delete user!' })
+        );
+    },
+  });
+};
 
   const columns = [
     { title: 'Username', dataIndex: 'username', key: 'username' },
